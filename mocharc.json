@@ -1,0 +1,14 @@
+{
+  "diff": true,
+  "spec": "test/**/*.ts",
+  "extension": ["ts"],
+  "opts": false,
+  "package": "./package.json",
+  "reporter": "spec",
+  "slow": 75,
+  "timeout": 10000,
+  "ui": "bdd",
+  "watch-files": ["src/**/*.ts", "test/**/*.ts"],
+  "watch-ignore": ["node_modules","built"],
+  "require": "ts-node/register"
+}
