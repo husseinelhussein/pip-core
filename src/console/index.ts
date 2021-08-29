@@ -3,21 +3,7 @@ import { CommandManager } from './CommandManager';
 import { Kernel } from '../kernel/kernel';
 import { ErrorHandlerService } from '../services/ErrorHandlerService';
 import { DatabaseService } from '../services/DatabaseService';
-import {IAppConfig} from "../kernel/interfaces/IAppConfig";
-import * as path from "path";
-
-const getConfigFromArgs = (): IAppConfig|null => {
-  const args = process.argv.slice(2);
-  let config: IAppConfig;
-  for(const arg of args){
-    if (arg.startsWith('--config=')) {
-      const confPath = path.resolve(arg.split('--config=')[1]);
-      config = require(confPath);
-      return config;
-    }
-  }
-  return null;
-}
+import getConfigFromArgs from "../helpers/ConfigHelper";
 (async () => {
   const program = new commander.Command();
   program.version('0.0.1');
