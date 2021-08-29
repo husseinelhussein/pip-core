@@ -22,7 +22,7 @@ const getConfigFromArgs = (): IAppConfig|null => {
   const program = new commander.Command();
   program.version('0.0.1');
   program.allowUnknownOption(true);
-  program.option('-c, --config <value>', 'Configuration')
+  program.option('--config <value>', 'Configuration')
   const kernel = new Kernel();
   const config = getConfigFromArgs();
   if (config) {

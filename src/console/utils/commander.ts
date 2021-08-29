@@ -252,8 +252,22 @@ commander.Command.prototype.isOptionAfterName = function(option_name: string):bo
   // get the command index in args:
   let com_index = null;
   for(let i=0;i<rawArgs.length;i++){
+    // consider sub commands:
+    if (rawArgs[i].includes(' ')) {
+      const subRawArgs = rawArgs[i].split(' ');
+      for(let y = 0; y < subRawArgs.length; y++ ) {
+        if(subRawArgs[y] === this._name || this.patternMatch(subRawArgs[y], this._name)){
+          com_index = i;
+          break;
+        }
+      }
+    }
+    if (com_index) {
+      break;
+    }
     if(rawArgs[i] === this._name || this.patternMatch(rawArgs[i], this._name)){
       com_index = i;
+      break;
     }
   }
   // get the option index in args:

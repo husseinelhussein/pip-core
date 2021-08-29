@@ -14,7 +14,7 @@ export class BaseCommandTest extends BaseUnitTest{
    * Calls a console command.
    * @param args
    */
-  callCommand(args: string[]): Promise<any>{
+  callCommand(args: any[]): Promise<any>{
     return new Promise(async (res, reject) => {
       const path = resolve(Kernel.getRoodDir(), './src/console');
       const options: ForkOptions = {

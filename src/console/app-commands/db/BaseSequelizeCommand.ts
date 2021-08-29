@@ -2,7 +2,7 @@ import { BaseCommand } from '../../BaseCommand';
 import { ICommandConfig } from '../../interfaces/ICommandConfig';
 import { inject, injectable } from 'inversify';
 import { MigrationCommand } from './MigrationCommand';
-import { OtherDbCommand } from './OtherDbCommand';
+import { ModelCommand } from './ModelCommand';
 import { UmzugService } from '../../../services/UmzugService';
 import { Logger } from 'winston';
 

@@ -51,29 +51,37 @@ export class MigrationCommand extends BaseSequelizeCommand{
     };
   }
   showPrompt(config: ICommandConfig, options:any|string[], called_command?: string): boolean {
+    const confirm = this.confirmed(options);
+    return !confirm;
+  }
+
+  /**
+   * Checks whether the user confirmed the migration.
+   *
+   * @param options
+   * @return boolean
+   */
+  confirmed(options: any): boolean{
     let confirm = true;
     if (options.confirm && typeof options.confirm === 'boolean') {
-      confirm = options.confirm === "1" || options.confirm === "true";
+      confirm = options.confirm > 1 || options.confirm;
+    }
+    if( typeof options.confirm === "string") {
+      confirm = parseInt(options.confirm) > 0 || options.confirm === "true";
     }
     else {
       confirm = options.confirm;
     }
-    return !confirm;
+    return confirm;
   }
-
   async run(args:any|string[], options:any|string[], called_command?:string): Promise<any> {
     if (options.direction !== 'up' && options.direction !== 'down') {
       throw Error('Direction is not valid, valid directions are: up, down');
     }
-    let confirmed;
+    let confirmed = false;
     if (options.answers && options.answers.confirm && options.answers.confirm === "No"){
-      confirmed = false;
-    }
-    if (typeof options.confirm === "string" ) {
-      confirmed = options.confirm === "1" || options.confirm === "true";
-    }
-    else {
-      confirmed = options.confirm;
+      // check the passed options:
+      confirmed = this.confirmed(options);
     }
     if(!confirmed) {
       return null;

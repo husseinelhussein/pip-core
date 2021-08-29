@@ -3,7 +3,7 @@ import { Kernel } from '../kernel/kernel';
 import { MigrationCommand } from './app-commands/db/MigrationCommand';
 import { BaseCommand } from './BaseCommand';
 import { Command } from 'commander';
-import { OtherDbCommand } from './app-commands/db/OtherDbCommand';
+import { ModelCommand } from './app-commands/db/ModelCommand';
 import { IArgConfig, ICommandConfig } from './interfaces/ICommandConfig';
 import { prompt } from "inquirer";
 import { BaseSequelizeCommand } from './app-commands/db/BaseSequelizeCommand';
@@ -19,7 +19,7 @@ export class CommandManager extends Manager{
     let commands = await super.register(container, true);
 
     // Register app commands:
-    const app_commands = [BaseSequelizeCommand, MigrationCommand, OtherDbCommand, SeedCommand];
+    const app_commands = [BaseSequelizeCommand, MigrationCommand, ModelCommand, SeedCommand];
     for(const app_command of app_commands){
       const command: any = app_command;
       container.bind(command).toSelf();

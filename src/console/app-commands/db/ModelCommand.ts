@@ -6,51 +6,23 @@ import { Kernel } from '../../../kernel/kernel';
 import { BaseSequelizeCommand } from './BaseSequelizeCommand';
 
 @injectable()
-export class OtherDbCommand extends BaseSequelizeCommand{
+export class ModelCommand extends BaseSequelizeCommand{
 
   getName(): string {
-    return "db:*";
+    return "model:*";
   }
 
   init(): ICommandConfig {
     return {
-      description: "A wrapper for other db commands",
+      description: "A wrapper for the model commands",
       allowUnknownOptions: true,
       passOptionsAsObject: true,
       usage: "",
-      questions: [
-        {
-          type: "list",
-          name: "confirm",
-          message: "Are you sure you want to continue?",
-          choices: [
-            'Yes',
-            'No'
-          ],
-          default: "Yes",
-        }
-      ],
     };
-  }
-
-  showPrompt(config: ICommandConfig, options:any|string[], called_command?:string): boolean {
-    // to ignore if the command in the list:
-    const ignorable:string [] = [
-        'db:migrate:status',
-    ];
-
-    if(called_command && ignorable.includes(called_command)){
-      return false;
-    }
-    return true;
   }
 
   run(args:any|string[],options:any, called_command?:string): Promise<any> {
     return new Promise<any>((res,reject) => {
-      if(options.answers.confirm === 'No'){
-        res();
-        return;
-      }
       let command = "";
       if(called_command){
         command = called_command

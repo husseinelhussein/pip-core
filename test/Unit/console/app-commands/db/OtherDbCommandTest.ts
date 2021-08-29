@@ -13,7 +13,7 @@ export class OtherDbCommandTest extends BaseDbCommandTest{
   async run(){
     // test seeding:
     let err = null;
-    const res = await this.callCommand(['sequelize db:migrate', '-c true', '-i false']).catch(e => err = e);
+    const res = await this.callCommand(['sequelize db:model:generate', '-c', true, '--name', 'User', '--attributes', 'firstName:string,lastName:string,email:string']).catch(e => err = e);
     expect(err).to.be.null;
     expect(res).not.to.be.null
   }
