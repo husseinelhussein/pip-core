@@ -1,16 +1,14 @@
 {
-    "name": "pip",
+    "name": "pip-core",
     "version": "0.0.1",
     "description": "a framework for building node.js apps",
-    "main": "built/main.js",
+    "keywords": ["pip", "mvc", "framework", "node.js framework"],
     "engines": {
         "node": "12.18.0",
         "npm": "*"
     },
     "scripts": {
         "build": "node node_modules/gulp/bin/gulp.js compile",
-        "migrate": "node built/lib/console sequelize db:migrate -c true",
-        "start": "ls -la ./node_modules/ && npm run migrate && node built/main.js",
         "test": "mocha --config ./mocharc.json",
         "lint": "eslint . --ext .ts"
     },
