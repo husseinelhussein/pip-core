@@ -30,7 +30,7 @@ export class BaseSequelizeCommand extends BaseCommand{
   getCommands(): string[] {
     return [
         "MigrationCommand",
-        "OtherDbCommand",
+        "ModelCommand",
         "SeedCommand"
     ];
   }
