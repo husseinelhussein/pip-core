@@ -4,7 +4,6 @@ import * as request from 'supertest';
 import { Container } from 'inversify';
 import { DatabaseService } from '../src/services/DatabaseService';
 import { Sequelize } from 'sequelize-typescript';
-import * as _ from "lodash";
 import { MigrationCommand } from '../src/console/app-commands/db/MigrationCommand';
 import seeder from '../src/database/listener/SeedListener';
 import { expect } from 'chai';
@@ -21,19 +20,21 @@ export class BaseTest {
     protected appPassword: string;
     public constructor(){}
 
-    async init(listen?: boolean, connectDB?:boolean, migrate?:boolean, env?: string, drop?: boolean):Promise<any>{
+    async init(listen?: boolean, connectDB?:boolean, migrate?:boolean, env?: string, drop?: boolean, config?:IAppConfig):Promise<any>{
         return new Promise<any>(async (resolve,reject) => {
             const kernel = new Kernel();
-            const defaultConfig:IAppConfig = require(path.resolve(__dirname, './assets/env/default.config'));
-            const testConfig:IAppConfig = require(path.resolve(__dirname, './assets/env/lib_test.config'));
-            const config: IAppConfig = Object.assign(defaultConfig, testConfig);
+            if(!config){
+                const defaultConfig:IAppConfig = require(path.resolve(__dirname, './assets/env/default.config'));
+                const testConfig:IAppConfig = require(path.resolve(__dirname, './assets/env/lib_test.config'));
+                config = <IAppConfig> Object.assign(defaultConfig, testConfig);
+            }
             kernel.setConfig(config);
             const app = await kernel.boot(config.env);
             this.kernel = kernel;
             this.client = request(app)
             this.appPort = process.env.PORT || 5000;
-            this.appUser = process.env.APP_USERNAME || "test@email.com";
-            this.appPassword = process.env.APP_PASSWORD || "test12345";
+            this.appUser = process.env.APP_USERNAME || "john@example.com";
+            this.appPassword = process.env.APP_PASSWORD || "test";
             if (app && listen) {
                 app.listen(this.appPort, () => {
                     console.log(`API listening on port ${this.appPort}`);

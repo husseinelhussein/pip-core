@@ -7,6 +7,7 @@ import {
 } from 'passport-jwt';
 import { IBaseStrategy } from '../interfaces/IBaseStrategy';
 import User from '../../models/User';
+import { ModelManager } from "../../models/ModelManager";
 
 export class ApiStrategy implements IBaseStrategy{
     protected name = "api_auth";
@@ -33,8 +34,16 @@ export class ApiStrategy implements IBaseStrategy{
             done(err,null,"Forbidden");
             return;
         }
-        // todo: get the user from the repository instead:
-        const user = <User> await User.findByPk(userId).catch(console.log);
+        let userModel;
+        try {
+            // in case the user has already defined a User model, get it.
+            userModel = ModelManager.resolveModel('User');
+        }
+        catch (e) {
+            // Otherwise use the default User model.
+            userModel = User;
+        }
+        const user = <User> await userModel.findByPk(userId).catch(console.log);
         if(!user){
             const err = new Error("Forbidden");
             done(err,null);

@@ -83,6 +83,9 @@ export class MigrationCommand extends BaseSequelizeCommand{
       // check the passed options:
       confirmed = this.confirmed(options);
     }
+    else if(options.confirm) {
+      confirmed = true;
+    }
     if(!confirmed) {
       return null;
     }

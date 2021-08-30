@@ -6,7 +6,6 @@ import { IRouterOptions,IMiddleware,IRoute} from './interfaces/IRouteOptions';
 import { BaseController } from '../controller/BaseController';
 import { ErrorHandlerService } from '../services/ErrorHandlerService';
 import { QueryParser } from './QueryParser';
-import {IAppConfig} from "../kernel/interfaces/IAppConfig";
 
 export class Router{
     protected container: Container;
@@ -43,6 +42,7 @@ export class Router{
 
     }
     protected async initializeRoute(router: OrRouter, options:IRouterOptions){
+        // @todo: refactor the router initialization:
         if(options.groups){
             for(const group of options.groups){
                 // register middle-wares:

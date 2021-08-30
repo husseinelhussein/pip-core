@@ -7,6 +7,8 @@ import {ErrorHandlerService} from './ErrorHandlerService';
 import User from '../models/User';
 import { inject, injectable } from 'inversify';
 import { BaseService } from './BaseService';
+import {ModelManager} from "../models/ModelManager";
+import {StaticModel} from "../@types/model.t";
 config({ path: resolve(__dirname, "../.env") });
 
 @injectable()
@@ -45,7 +47,14 @@ export class AuthService extends BaseService{
             return null;
         }
         if(!user){
-            user = <User> await User.findOne({ where:{ email: username } }).catch(e => this.errHandler.handle(e));
+            let userModel;
+            try {
+                userModel = ModelManager.resolveModel('User');
+            } catch (e) {
+                userModel = User;
+            }
+
+            user = <User> await userModel.findOne({ where:{ email: username } }).catch(e => this.errHandler.handle(e));
             if(!user){
                 return null;
             }
