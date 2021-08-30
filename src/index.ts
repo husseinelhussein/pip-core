@@ -1,15 +1,22 @@
 import { Kernel } from './kernel/kernel';
 import { DatabaseService } from './services/DatabaseService';
 import getConfigFromArgs from "./helpers/ConfigHelper";
+import {IAppConfig} from "./kernel/interfaces/IAppConfig";
 
-(async () => {
+/**
+ * Starts the app.
+ */
+const start = async (config?:IAppConfig|null) => {
     //1. Get the configuration:
-    // 2. Boot the app:
     const kernel = new Kernel();
-    const config = getConfigFromArgs();
-    if (config) {
+    if(config){
         kernel.setConfig(config);
     }
+    else {
+        config = getConfigFromArgs();
+        kernel.setConfig(config);
+    }
+    // 2. Boot the app:
     const app = await kernel.boot();
     if (!app) {
         console.error('Failed to start api');
@@ -29,4 +36,6 @@ import getConfigFromArgs from "./helpers/ConfigHelper";
     app.listen(PORT, () => {
         console.log(`API listening on port ${PORT}`);
     });
-})();
+}
+
+export default start;
