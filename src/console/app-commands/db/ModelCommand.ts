@@ -43,7 +43,7 @@ export class ModelCommand extends BaseSequelizeCommand{
         }
       }
       const seq_path = './node_modules/sequelize-cli/lib/sequelize';
-      const path = resolve(Kernel.getRoodDir(), seq_path);
+      const path = resolve(Kernel.getRootDir(), seq_path);
       console.log('Executing ' + seq_path + " " + command);
       exec('node '+ path + " " + command ,((error:any, stdout:string, stderr:string) => {
         if(stdout){

@@ -2,7 +2,12 @@
     "name": "pip-core",
     "version": "0.0.1",
     "description": "a framework for building node.js apps",
-    "keywords": ["pip", "mvc", "framework", "node.js framework"],
+    "keywords": [
+        "pip",
+        "mvc",
+        "framework",
+        "node.js framework"
+    ],
     "engines": {
         "node": "12.18.0",
         "npm": "*"
@@ -29,6 +34,7 @@
         "lodash": "^4.17.15",
         "moment": "^2.24.0",
         "morgan": "^1.9.1",
+        "multer": "^1.4.3",
         "ora": "^4.0.3",
         "passport": "^0.4.0",
         "passport-jwt": "^4.0.0",

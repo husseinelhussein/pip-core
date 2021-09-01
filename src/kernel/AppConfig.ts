@@ -1,6 +1,7 @@
 import { IAppConfig } from './interfaces/IAppConfig';
 import { Kernel } from './kernel';
 import { ISequelizeOptions } from './interfaces/ISequelizeOptions';
+import {IStorageConfig} from "../storage/interfaces/IStorageConfig";
 
 export class AppConfig implements IAppConfig{
   // App config:
@@ -31,21 +32,13 @@ export class AppConfig implements IAppConfig{
   resources_path = '';
   commands_path = '';
   temp_path = "";
-  importers_path = '';
+  storage?: IStorageConfig;
 
-  // Importer config:
-  import_api = '';
-  import_enabled = false;
-  existing_data_strategy = "skip";
-  api_username = "";
-  api_password = "";
-  importers_to_run: string[] = [];
-  items_per_importer = 0;
   constructor(env?: string){
     this.load(env);
   }
   load(env?: string):IAppConfig{
-    const env_dir = Kernel.getRoodDir() + "/env/";
+    const env_dir = Kernel.getRootDir() + "/env/";
     // Load the default environment variables:
     const defaultConf = require(env_dir + "default.config");
     // Load the environment from a file based on the key app_env from "default.config":

@@ -24,4 +24,12 @@ export abstract class BaseSeeder <T extends BaseModel>{
    * Removes records for a certain model.
    */
   public abstract async down():Promise<any>;
+
+  /**
+   * A hook to run after saving the model.
+   * @param model
+   */
+  public async afterSave(model: T):Promise<T>{
+    return model;
+  }
 }

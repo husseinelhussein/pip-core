@@ -9,12 +9,10 @@ const seeder = {
         seeder.setQueryInterface(queryInterface);
         const items = await seeder.up();
         if (items) {
-          const rawItems = [];
-          for (const item of items) {
-            rawItems.push(item.toJSON());
+          for(const item of items) {
+            await item.save();
+            await seeder.afterSave(item);
           }
-          const model = seeder.getModel();
-          await model.bulkCreate(rawItems);
         }
       }
     }

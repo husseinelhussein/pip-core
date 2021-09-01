@@ -1,4 +1,5 @@
 import { ISequelizeOptions } from './ISequelizeOptions';
+import {IStorageConfig} from "../../storage/interfaces/IStorageConfig";
 
 export interface IAppConfig {
   // App config:
@@ -31,13 +32,5 @@ export interface IAppConfig {
   factories_path: string,
   commands_path: string,
   temp_path: string,
-  importers_path: string,
-
-  // Importer config:
-  import_api: string,
-  import_enabled:boolean,
-  existing_data_strategy: string,
-  api_username: string,
-  api_password: string,
-  importers_to_run: string[],
+  storage?: IStorageConfig;
 }

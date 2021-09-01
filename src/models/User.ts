@@ -28,10 +28,6 @@ export default class User extends BaseModel<User>{
     };
     public hiddenAttributes: Array<string> = ['deletedAt','password'];
 
-    @IsString()
-    @Column(DataType.STRING)
-    public username: string;
-
     @IsBoolean()
     @Column(DataType.BOOLEAN)
     public active: boolean;

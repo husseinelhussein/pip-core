@@ -22,6 +22,7 @@ export class ApiMiddleware{
             if(!user){
                 return sendForbidden(info.message);
             }
+            req.user = user;
             next();
         };
         passport.authenticate('api_auth', {session: false}, callback)(req,res,next);

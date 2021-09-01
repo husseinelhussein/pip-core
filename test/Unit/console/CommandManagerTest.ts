@@ -63,7 +63,7 @@ export class CommandManagerTest extends BaseCommandTest{
     // add the option to the program
     //const stop = null;
     const node_path = process.argv[0];
-    const console_path = resolve(Kernel.getRoodDir() + '/src/lib/console');
+    const console_path = resolve(Kernel.getRootDir() + '/src/lib/console');
     const args = [node_path, console_path,'my_command','--option_a','option_a_value'];
     await program.parseAsync(args);
     verify(spiedCommand.run(anything(),anything(),anything())).called();

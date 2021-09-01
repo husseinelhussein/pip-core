@@ -12,6 +12,7 @@ import { ModelManager } from '../models/ModelManager';
 import { FactoryManager } from '../database/factories/FactoryManager';
 import { SeedManager } from '../database/seeders/SeedManager';
 import { CommandManager } from '../console/CommandManager';
+import {StorageDriverManager} from "../storage/StorageDriverManager";
 
 export class ContainerLoader{
     public static async register(){
@@ -52,7 +53,8 @@ export class ContainerLoader{
         // Register commands:
         await CommandManager.register(container);
 
-        // Register importers:
+        // Register Storage Drivers:
+        await StorageDriverManager.register(container);
 
         return container;
     }

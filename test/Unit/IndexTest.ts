@@ -18,7 +18,7 @@ export class IndexTest extends BaseUnitTest{
      */
     async testIndex(): Promise<any>{
         const run = new Promise(async (res, reject) => {
-            const path = resolve(Kernel.getRoodDir(), './src/console');
+            const path = resolve(Kernel.getRootDir(), './src/console');
             const options: ForkOptions = {
                 silent: false,
                 execArgv: ['-r', 'ts-node/register','--inspect'],

@@ -12,6 +12,7 @@ import * as App from 'express';
 import { Container } from 'inversify';
 import { AppConfig } from './AppConfig';
 import { IAppConfig } from './interfaces/IAppConfig';
+import {Storage} from "../storage/Storage";
 
 declare let kernel: Kernel;
 export class Kernel {
@@ -37,10 +38,17 @@ export class Kernel {
 
         /** Register services,repositories..etc: */
         const con = await ContainerLoader.register();
+        this.container = con;
 
         /** Load Security middlewares */
         const security = new Security(app);
         await security.init();
+
+        this.app = app;
+
+        /** Initialize Storage before routes */
+        const storage = con.resolve(Storage);
+        await storage.init();
 
         /** Load application routes */
         const router = new Router(con, this.config.routes_path);
@@ -57,12 +65,14 @@ export class Kernel {
         });
         /** Load error middleware */
         app.use(errorMiddleware);
+
         this.app = app;
         this.container = con;
         gb.kernel = this;
+
         return app;
     }
-    public static getRoodDir():string{
+    public static getRootDir():string{
         let p = path.resolve(__dirname, '../../');
         p = p.replace(/(?:\\|\/)built(?:\\|\/)kernel/g,'');
         return p;

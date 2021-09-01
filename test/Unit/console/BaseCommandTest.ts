@@ -16,7 +16,7 @@ export class BaseCommandTest extends BaseUnitTest{
    */
   callCommand(args: any[]): Promise<any>{
     return new Promise(async (res, reject) => {
-      const path = resolve(Kernel.getRoodDir(), './src/console');
+      const path = resolve(Kernel.getRootDir(), './src/console');
       const options: ForkOptions = {
         silent: false,
         execArgv: ['-r', 'ts-node/register','--inspect'],

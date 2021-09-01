@@ -8,7 +8,6 @@ import User from '../models/User';
 import { inject, injectable } from 'inversify';
 import { BaseService } from './BaseService';
 import {ModelManager} from "../models/ModelManager";
-import {StaticModel} from "../@types/model.t";
 config({ path: resolve(__dirname, "../.env") });
 
 @injectable()
@@ -27,10 +26,10 @@ export class AuthService extends BaseService{
         return true;
     }
 
-    public static validateAuthFields(username: string, password: string):boolean {
+    public static validateAuthFields(email: string, password: string):boolean {
         // validate username:
-        username = username.trim();
-        if(username === ""){
+        email = email.trim();
+        if(email === ""){
             return false;
         }
         // validate password:
@@ -41,8 +40,8 @@ export class AuthService extends BaseService{
         return true;
     }
 
-    public async login(username:string, password: string, user?:User):Promise<IToken|null>{
-        const fieldsValid = AuthService.validateAuthFields(username,password);
+    public async login(email:string, password: string, user?:User):Promise<IToken|null>{
+        const fieldsValid = AuthService.validateAuthFields(email,password);
         if(!fieldsValid){
             return null;
         }
@@ -54,7 +53,7 @@ export class AuthService extends BaseService{
                 userModel = User;
             }
 
-            user = <User> await userModel.findOne({ where:{ email: username } }).catch(e => this.errHandler.handle(e));
+            user = <User> await userModel.findOne({ where:{ email: email } }).catch(e => this.errHandler.handle(e));
             if(!user){
                 return null;
             }

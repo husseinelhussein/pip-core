@@ -97,7 +97,7 @@ export class BaseTest {
         const response = await this.client
             .post('/login')
             .set("Content-type", "application/json")
-            .send({ username: this.appUser, password: this.appPassword});
+            .send({ email: this.appUser, password: this.appPassword});
         this.token = response.body.access_token;
         return true;
     }
