@@ -1,7 +1,5 @@
 // eslint-disable-next-line no-undef
-const {series, parallel, watch, src, dest, lastRun} = require('gulp');
-// eslint-disable-next-line no-undef
-const {config} = require('dotenv');
+const {series, parallel, watch, src, dest} = require('gulp');
 // eslint-disable-next-line no-undef
 const {resolve} = require("path");
 // eslint-disable-next-line no-undef
@@ -28,9 +26,8 @@ const other_files = [
   "!test/",
   "!test/**/*"
 ];
-const dst = "built";
+const dst = '../node_modules/pip-core/src';
 // eslint-disable-next-line no-undef
-config({ path: resolve(__dirname, "../.env") });
 // eslint-disable-next-line no-undef
 const PORT = process.env.APP_PORT || 5000;
 // eslint-disable-next-line no-undef
@@ -40,8 +37,8 @@ function clean(){
   const files = [
     dst + '/database/migrations/*',
     dst + '/database/seeders/*',
-    dst + '/lib/test/assets/database/migrations/*',
-    dst + '/lib/test/assets/database/seeders/*',
+    dst + '/test/assets/database/migrations/*',
+    dst + '/test/assets/database/seeders/*',
   ];
   return src(files, {read: false})
       .pipe(cleaner());
@@ -119,8 +116,8 @@ function browser(){
   });
 }
 // eslint-disable-next-line no-undef
-exports.compile = series(clean,compile,copy);
+exports.compile = series(compile, copy);
 // eslint-disable-next-line no-undef
-exports.default = series(clean,compile,copy, parallel(watchFiles, serve));
+exports.default = series(clean, compile,copy, parallel(watchFiles, serve));
 // eslint-disable-next-line no-undef
-exports.watch = series(clean,compile,copy, parallel(watchFiles, serve));
+exports.watch = series(clean, compile,copy, parallel(watchFiles, serve));
