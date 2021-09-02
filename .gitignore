@@ -1,7 +1,7 @@
 node_modules
 .idea
-built/*
-!built/.gitkeep
+build/*
+!build/.gitkeep
 log/*
 !log/.gitkeep
 

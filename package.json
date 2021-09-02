@@ -2,6 +2,7 @@
     "name": "pip-core",
     "version": "0.0.1",
     "description": "a framework for building node.js apps",
+    "main": "build/index.js",
     "keywords": [
         "pip",
         "mvc",

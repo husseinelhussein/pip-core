@@ -74,7 +74,7 @@ export class Kernel {
     }
     public static getRootDir():string{
         let p = path.resolve(__dirname, '../../');
-        p = p.replace(/(?:\\|\/)built(?:\\|\/)kernel/g,'');
+        p = p.replace(/(?:\\|\/)build(?:\\|\/)kernel/g,'');
         return p;
     }
 
