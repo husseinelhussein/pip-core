@@ -2,7 +2,7 @@
     "name": "pip-core",
     "version": "0.0.1",
     "description": "a framework for building node.js apps",
-    "main": "build/index.js",
+    "main": "build/src",
     "keywords": [
         "pip",
         "mvc",
@@ -14,7 +14,7 @@
         "npm": "*"
     },
     "scripts": {
-        "build": "node node_modules/gulp/bin/gulp.js compile",
+        "build": "tsc",
         "test": "mocha --config ./mocharc.json",
         "lint": "eslint . --ext .ts"
     },

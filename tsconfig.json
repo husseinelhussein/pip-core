@@ -1,15 +1,17 @@
 {
    "compilerOptions": {
       "lib": ["es2018"],
+      "esModuleInterop": false,
+      "allowSyntheticDefaultImports": true,
       "typeRoots": [
          "@types", // custom merged types must be first in a list
-         "node_modules/@types",
+         "node_modules/@types"
       ],
       "types": ["reflect-metadata","node","mocha","chai"],
       "target": "es2018",
       "module": "commonjs",
       "moduleResolution": "node",
-      "outDir": "./built",
+      "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": false,
@@ -17,13 +19,14 @@
       "strictNullChecks": true,
       "noUnusedLocals": false,
       "noUnusedParameters": false,
+      "declaration": true
    },
    "include": [
       "src",
       "test"
    ],
    "exclude": [
-      "built",
+      "build",
       "node_modules",
       "**/*.spec.ts",
      "src/database/migrations/*.ts",

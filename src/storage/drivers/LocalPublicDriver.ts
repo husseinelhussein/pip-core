@@ -4,7 +4,6 @@ import {Kernel} from "../../kernel/kernel";
 import * as multer from "multer";
 import { Request } from "express";
 import * as fs from "fs";
-
 declare let kernel: Kernel;
 @injectable()
 export class LocalPublicDriver extends BaseDriver {

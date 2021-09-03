@@ -26,7 +26,7 @@ const other_files = [
   "!test/",
   "!test/**/*"
 ];
-const dst = '../node_modules/pip-core/src';
+const dst = 'build';
 // eslint-disable-next-line no-undef
 // eslint-disable-next-line no-undef
 const PORT = process.env.APP_PORT || 5000;

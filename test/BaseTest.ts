@@ -31,7 +31,7 @@ export class BaseTest {
             kernel.setConfig(config);
             const app = await kernel.boot(config.env);
             this.kernel = kernel;
-            this.client = request(app)
+            this.client = request.agent(app)
             this.appPort = process.env.PORT || 5000;
             this.appUser = process.env.APP_USERNAME || "john@example.com";
             this.appPassword = process.env.APP_PASSWORD || "test";
